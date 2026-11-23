@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "claim_id": "presentation-export-checks",
+  "repository": {
+    "commit": "90abbd9f87f20fb2c8a05ab9879a74202d0eaead",
+    "dirty": true
+  },
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "/Users/jasonshootzy/Desktop/spo_eng/group-demostration/evidence/verify_results.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.14.2"
+      }
+    ],
+    "hardware": "macOS-26.6.2-arm64-arm-64bit-Mach-O arm64"
+  },
+  "mathematics": {
+    "assertion_tested": "Four full-trial discrete proxy distances, three matched-row export comparisons, and Annex B entropy, KL, mutual information and illustrative Bayesian calculations.",
+    "coefficient_domain": "IEEE-754 binary64",
+    "conventions": "Zero-based rows; 60 Hz; positions in metres; elbow flexion in degrees; delta = Vizard - OpenSim.",
+    "inputs": [
+      "src/script/topspin_affordance_scene.py",
+      "src/motion-data/Top_spin_SegmentPosition.csv",
+      "src/motion-data/Top_spin_SegmentOrientation.csv",
+      "src/required-assets/elbow_flex_l.csv",
+      "src/required-assets/left_hand_height.csv",
+      "src/required-assets/Top_spin-001_Xsens_jointangle_q.mot",
+      "src/required-assets/info_theory.m",
+      "group-report/annexes/anexo_b_teoria_informacion.tex",
+      "group-demostration/evidence/verify_results.py"
+    ],
+    "bounds": {
+      "frames": 379,
+      "conditions": 4,
+      "validation_frames": [
+        150,
+        185,
+        216
+      ],
+      "distance_tolerance_m": 1e-12,
+      "stroke_windows": 3,
+      "frames_per_window": 31,
+      "speed_bins": 8
+    },
+    "non_claims": [
+      "No Vizard GUI execution",
+      "No OpenSim rerun or synchronized OpenSim pose capture",
+      "No measured racket-ball impact",
+      "No participant judgments",
+      "No maximum actor capability"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-23T18:29:27.403702+00:00",
+    "runtime_seconds": 0.06277533300089999,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": 1,
+      "max_threads": 1
+    }
+  },
+  "outputs": [
+    {
+      "path": "group-demostration/evidence/conditions.csv",
+      "sha256": "ea650502e87078dd5e48c443f0c008adc0e12e90aa883e8d8a9db6f7f0d7db21",
+      "kind": "result"
+    },
+    {
+      "path": "group-demostration/evidence/validation.csv",
+      "sha256": "266e7eaa2be6e4f8104ba774a1772e9b52545a6f3a21b0f23262cf7671d4af60",
+      "kind": "result"
+    },
+    {
+      "path": "group-demostration/evidence/kinematics.csv",
+      "sha256": "f486a21f04ee95b18e099c87808c2814af868c183e5a6378df9dc9310464aa85",
+      "kind": "result"
+    },
+    {
+      "path": "group-demostration/evidence/speed-series.csv",
+      "sha256": "e3a126cfe0645b518a08eb4ed06b056a03f76b7eb46f4935ad4e3bb2c544204a",
+      "kind": "result"
+    },
+    {
+      "path": "group-demostration/evidence/speed-occupancy.csv",
+      "sha256": "6a842ea1e523b366a26759c6711776c18d6523e3dec5ebe667514c4d0f858a02",
+      "kind": "result"
+    },
+    {
+      "path": "group-demostration/evidence/results.json",
+      "sha256": "8804de4fea5ef4d2926f57fbd023508c366dd88f13c44cc31594306b25bd993b",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Independent Xsens-coordinate distance reconstruction agrees to 1e-12 m.",
+    "379 rows in each export; three sampled times differ by at most 1.1 ms.",
+    "Three elbow CSV values agree with the original .mot file.",
+    "Annex B peak selection and success counts reproduced; mutual-information identity cross-checked.",
+    "Before/after hashes identical for every input."
+  ],
+  "result": "Finite assertions verified in the stated range, conditional on supplied export conventions.",
+  "residual_risks": [
+    "Export metadata contains a duplicate time header and misleading inDegrees=no for elbow values.",
+    "Matching rows assume the supplied files represent the same trial; source acquisition not independently verified.",
+    "Discrete sample intersections do not establish continuous collision or successful return.",
+    "Cross-pipeline discrepancies do not define a calibrated spatial error bound."
+  ],
+  "input_artifacts": [
+    {
+      "path": "src/script/topspin_affordance_scene.py",
+      "sha256": "43ada098e048ea3d32ce6bdda5788f0a4e67a5f45159f35ae3df08eb9109c937",
+      "sha256_after": "43ada098e048ea3d32ce6bdda5788f0a4e67a5f45159f35ae3df08eb9109c937"
+    },
+    {
+      "path": "src/motion-data/Top_spin_SegmentPosition.csv",
+      "sha256": "a87866dd26f65adfc1292377d7b902d259b7c87b7b5efbcf44d154e5f83962e3",
+      "sha256_after": "a87866dd26f65adfc1292377d7b902d259b7c87b7b5efbcf44d154e5f83962e3"
+    },
+    {
+      "path": "src/motion-data/Top_spin_SegmentOrientation.csv",
+      "sha256": "6b9e303d91f6acc2b17cd7ab3586361a2a6bfa0f89b0500056c413b01901b043",
+      "sha256_after": "6b9e303d91f6acc2b17cd7ab3586361a2a6bfa0f89b0500056c413b01901b043"
+    },
+    {
+      "path": "src/required-assets/elbow_flex_l.csv",
+      "sha256": "15297f8ae4edc5a1558584a953e4ed0f45609da5dd22ceaf32fbc93bb0c8b2c5",
+      "sha256_after": "15297f8ae4edc5a1558584a953e4ed0f45609da5dd22ceaf32fbc93bb0c8b2c5"
+    },
+    {
+      "path": "src/required-assets/left_hand_height.csv",
+      "sha256": "e86ac8ea3dd2115cc66d85982df6627dc7e3a94f6b5bc13ca0f9282f59723815",
+      "sha256_after": "e86ac8ea3dd2115cc66d85982df6627dc7e3a94f6b5bc13ca0f9282f59723815"
+    },
+    {
+      "path": "src/required-assets/Top_spin-001_Xsens_jointangle_q.mot",
+      "sha256": "07f0d87b739f03b4f2db6d433d45ee73f66ed389602b4f73a54e5c215fd3cb41",
+      "sha256_after": "07f0d87b739f03b4f2db6d433d45ee73f66ed389602b4f73a54e5c215fd3cb41"
+    },
+    {
+      "path": "src/required-assets/info_theory.m",
+      "sha256": "a5b00aac96c5727c645dabe7cdb4b307070d4bb4fb6dfbeeaabc9337b86ec361",
+      "sha256_after": "a5b00aac96c5727c645dabe7cdb4b307070d4bb4fb6dfbeeaabc9337b86ec361"
+    },
+    {
+      "path": "group-report/annexes/anexo_b_teoria_informacion.tex",
+      "sha256": "7af820acc072433b219fcf6d269bbd6691058bcffe42007b21c94593104393aa",
+      "sha256_after": "7af820acc072433b219fcf6d269bbd6691058bcffe42007b21c94593104393aa"
+    },
+    {
+      "path": "group-demostration/evidence/verify_results.py",
+      "sha256": "263b197140435b04315529f859d3f0d539582aa0400b78ce5d267572972d5688",
+      "sha256_after": "263b197140435b04315529f859d3f0d539582aa0400b78ce5d267572972d5688"
+    }
+  ],
+  "declared_results": [
+    "group-demostration/evidence/conditions.csv",
+    "group-demostration/evidence/validation.csv",
+    "group-demostration/evidence/kinematics.csv",
+    "group-demostration/evidence/speed-series.csv",
+    "group-demostration/evidence/speed-occupancy.csv",
+    "group-demostration/evidence/results.json"
+  ]
+}

@@ -1,0 +1,244 @@
+\begin{frame}[plain,noframenumbering]\titlepage\end{frame}
+\section{Question and recorded motion}
+\begin{frame}{A possibility for this actor and path}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.43\textwidth}
+\begin{tbox}{Research question}
+Can this recorded racket-proxy sweep intersect a stationary ball as its outward position changes?
+\end{tbox}
+\par\medskip
+\begin{itemize}\small
+\item Actor: the captured left-handed player.
+\item Environment: table, floor and simulated ball.
+\item Scope: feasibility of the recorded path.
+\end{itemize}
+\end{column}
+\begin{column}{0.53\textwidth}
+\shot{images/view1.png}{3.85cm}
+\par\smallskip
+{\footnotesize Recorded skeleton with a hand/forearm proxy. The offset avatar provides a qualitative view.}
+\end{column}
+\end{columns}
+\begin{ibox}A geometric intersection does not establish a successful return.\end{ibox}
+\src{Project scene and report; E2 rubric, pp. 1--2}
+\end{frame}
+
+\begin{frame}{One trial, two representations}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.53\textwidth}
+\begin{tikzpicture}[n/.style={draw,thick,fill=white,align=center,text width=5.8cm,minimum height=0.72cm,font=\small},a/.style={-{Stealth[length=4pt]},thick}]
+\node[n] (data) {Xsens \texttt{Top\_spin} trial\\379 frames, 60 Hz, 0--6.300 s};
+\node[n,below=0.48cm of data] (viz) {Segment CSVs $\rightarrow$ Vizard\\metric skeleton and racket proxy};
+\node[n,below=0.48cm of viz] (os) {Same trial $\rightarrow$ OpenSim\\joint angles and hand-position exports};
+\draw[a] (data) -- (viz);
+\draw[a] (data.west) -- ++(-0.18,0) |- (os.west);
+\draw[a] (os.east) -- ++(0.22,0) |- (viz.east);
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Scale, axes and timing}
+\begin{itemize}\small
+\item Position in metres. Angles in degrees.
+\item Xsens: forward, left, up.
+\item Vizard: right, up, forward.
+\end{itemize}
+\[(x,y,z)_V=(-y,z,x)_X\]
+\begin{itemize}\small
+\item Remove initial horizontal pelvis offset. Preserve height.
+\item Normal $1.0\times$; labeled slow motion $0.25\times$.
+\end{itemize}
+\end{column}
+\end{columns}
+\par\medskip
+{\small Vizard reads Xsens CSVs. OpenSim supplies the comparison reference, rather than directly driving the scene.}
+\src{Scene data loader and axis mapping; \texttt{Top\_spin-001} OpenSim exports}
+\end{frame}
+
+\section{Fidelity}
+\begin{frame}{Three frames expose a height mismatch}
+\evidence{Recorded screenshots + recomputed export comparison}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.32\textwidth}\centering\textbf{V1: 2.500 s}\par\par\smallskip\shot{V1.png}{2.20cm}\end{column}
+\begin{column}{0.32\textwidth}\centering\textbf{V2: 3.083 s}\par\par\smallskip\shot{V2.png}{2.20cm}\end{column}
+\begin{column}{0.32\textwidth}\centering\textbf{V3: 3.600 s}\par\par\smallskip\shot{V3.png}{2.20cm}\end{column}
+\end{columns}
+\par\smallskip\centering\small
+\begin{tabular}{@{}lrrr@{}}\toprule
+Left hand height (m) & V1 / f150 & V2 / f185 & V3 / f216\\\midrule
+OpenSim export & 1.124 & 1.148 & 1.225\\
+Vizard skeleton & 1.081 & 1.177 & 1.334\\
+Difference (Vizard $-$ OpenSim) & $-0.043$ & $+0.029$ & $\mathbf{+0.109}$\\\bottomrule
+\end{tabular}\par
+\par\medskip\raggedright\small
+The 10.9 cm discrepancy at V3 limits fidelity. Segment/model definitions and alignment need further checking.
+\src{Same-row comparison; timestamp offsets $\leq1$ ms. Exact angles and evidence limits in backup A.}
+\end{frame}
+
+\section{Controlled investigation}
+\begin{frame}{A fixed rule defines interception}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.44\textwidth}
+\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth]
+\draw[line width=2pt] (-0.2,0)--(1.55,0);
+\fill (-0.2,0) circle(0.06);\fill (1.55,0) circle(0.07);
+\draw[dashed,thick] (1.55,0)--(2.75,0);
+\draw[thick,fill=black!8] (2.75,0) circle(0.65);
+\draw[thick,fill=black] (4.15,0) circle(0.17);
+\node[below,font=\footnotesize] at (-0.2,-0.12) {elbow};
+\node[below,font=\footnotesize] at (1.55,-0.12) {wrist};
+\node[above,font=\footnotesize] at (2.75,0.8) {proxy};
+\node[above,font=\footnotesize] at (4.15,0.4) {ball};
+\draw[<->] (1.55,-0.8)--node[below,font=\footnotesize]{0.10 m}(2.75,-0.8);
+\draw[<->] (2.75,1.3)--node[above,font=\footnotesize]{centre distance}(4.15,1.3);
+\node[align=left,font=\footnotesize] at (2,-1.8) {$r_{\rm proxy}=0.075$ m\\$r_{\rm ball}=0.020$ m};
+\end{tikzpicture}
+\par{\scriptsize Schematic, not to scale. No racket sensor was recorded.}
+\end{column}
+\begin{column}{0.52\textwidth}
+\textbf{Independent of observer judgments}
+\[D(d)=\min_{i=0,\ldots,378}\left\|\mathbf p_i-\mathbf b(d)\right\|\]
+\begin{ibox}Interception if $D(d)\leq0.095$ m\end{ibox}
+\small
+\[\mathbf b(d)=\mathbf p_{185}+d\,\hat{\mathbf u}_{\rm out}\]
+The outward direction runs horizontally from pelvis to proxy at frame 185.
+\par\medskip
+\begin{itemize}
+\item Vary only $d$: 0, 0.08, 0.15, 0.30 m.
+\item Fix motion, $1.0\times$ speed, camera and scene.
+\item Prediction: C1/C2 intersect; C3/C4 miss.
+\end{itemize}
+\end{column}
+\end{columns}
+\src{Scene: \texttt{paddle\_proxy}, \texttt{evaluate}, \texttt{CONDITIONS}}
+\end{frame}
+
+\begin{frame}{C2 and C3 straddle the model boundary}
+\evidence{Simulated geometry, independently recomputed from 379 recorded frames}
+\centering
+\begin{tabular}{@{}lrrcrrl@{}}\toprule
+ & $d$ (m) & $D$ (m) & Prediction & $t_{\min}$ (s) & Margin (m) & Result\\\midrule
+C1 & 0.00 & 0.000 & Possible & 3.083 & $+0.095$ & Intercept\\
+C2 & 0.08 & 0.080 & Possible & 3.083 & $+0.015$ & Intercept\\
+C3 & 0.15 & 0.150 & No & 3.083 & $-0.055$ & Miss\\
+C4 & 0.30 & 0.296 & No & 1.683 & $-0.201$ & Miss\\\bottomrule
+\end{tabular}\par
+\par\medskip
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\begin{tbox}{C2 is close to the threshold}
+\small Its positive margin is only 1.5 cm. The 2.9 cm hand-height discrepancy at V2 motivates a sensitivity check, but is not a calibrated proxy-error bound.
+\end{tbox}
+\end{column}
+\begin{column}{0.47\textwidth}
+\textbf{The search covers the full trial}\par\par\smallskip
+\small C4's nearest approach occurs earlier, at frame 101. It remains a miss. The minimum is not constrained to the reference stroke at frame 185.
+\end{column}
+\end{columns}
+\src{Margin $=0.095-D$; \texttt{evidence/conditions.csv}. Screenshots C1--C4 in backups C--D.}
+\end{frame}
+
+\begin{frame}{Playback and all four conditions}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.66\textwidth}
+\shot{C1.png}{4.35cm}
+\par\par\smallskip{\footnotesize Existing Vizard recording. Metric skeleton, proxy, ball and table.}
+\end{column}
+\begin{column}{0.30\textwidth}
+\small
+\key{SPACE} Play / pause\\[6pt]\key{R} Restart\\[6pt]
+\key{S} $1.0\times / 0.25\times$\\[6pt]\key{1--4} Conditions\\[6pt]
+\key{G} Validation frames\\[6pt]\key{V} Reveal criterion
+\par\medskip
+\begin{tbox}{Local video links}\footnotesize
+\href{run:C1VIDEO.mp4}{Open C1 clip (11.6 s)}\\[6pt]
+\href{run:C2,3,4VIDEO.mp4}{Open C2--C4 clip (23.6 s)}
+\end{tbox}
+\end{column}
+\end{columns}
+\src{Bundled MP4s; table $2.74\times1.525$ m, height 0.76 m; floor ruler 1 m}
+\end{frame}
+
+\section{Ecological interpretation}
+\begin{frame}{Viewpoint changes available information}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\centering\textbf{Scene view}\par\par\smallskip\shot{images/view3.png}{2.95cm}
+\par\par\smallskip\raggedright\small
+Top-down view separates horizontal paths. Vertical separation is harder to judge.
+\end{column}
+\begin{column}{0.47\textwidth}
+\textbf{Candidate optical information}
+\begin{itemize}\small
+\item Proxy--ball gap and its closure.
+\item Trajectory alignment and occlusion.
+\item Table edges, floor and ruler as scale references.
+\end{itemize}
+\par\medskip
+\begin{tbox}{One shared environment}
+\small Camera position changes projection and visibility. The world-coordinate criterion remains unchanged.
+\end{tbox}
+\end{column}
+\end{columns}
+\par\medskip
+{\small These are candidate cues. Their use by observers has not been measured.}
+\src{Gibson (1979); E2 rubric, p. 2; scene camera definitions}
+\end{frame}
+
+\begin{frame}{Possibility, judgment and outcome}
+\small
+\begin{tabularx}{\textwidth}{@{}p{2.1cm}Yp{3.2cm}@{}}\toprule
+Level & Question & Evidence status\\\midrule
+Action possibility & Does this modeled recorded sweep geometrically intersect this ball? & Simulated criterion\\[5pt]
+Judgment & Does an observer say that interception is possible? & Proposed protocol\\[5pt]
+Outcome & Does the struck ball clear the net and land legally? & Not tested\\\bottomrule
+\end{tabularx}\par
+\par\bigskip
+\begin{tbox}{Touch--posture covariation}
+In live action, changes in posture covary with contact and inertial forces. That relation supplies haptic information in its own right.
+\end{tbox}
+\par\smallskip
+\textbf{This scene is visual only.} A replay, force label or screw-variable drawing does not demonstrate haptic pickup.
+\src{Gibson (1966, 1979); E2 rubric, p. 2}
+\end{frame}
+
+\begin{frame}{Judgments remain a proposed experiment}
+\evidence{Proposed protocol. No participant responses collected or invented.}
+\begin{enumerate}
+\item \textbf{Consent and controls.} Three consenting peers, one fixed camera and skeleton view, same trial at $1.0\times$.
+\item \textbf{Blind the numerical cues.} Hide criterion, offset labels and console. Randomize four conditions, repeated three times: 12 trials per observer.
+\item \textbf{Record before feedback.} \emph{Can this recorded sweep intersect the ball?} Possible / not possible, plus confidence from 1 to 5.
+\item \textbf{Compare after all judgments.} Report counts, agreement and false positives/negatives by condition. Treat these as exploratory descriptions.
+\end{enumerate}
+\par\medskip
+\begin{ibox}Geometric classification is available. Perceptual accuracy is unmeasured.\end{ibox}
+\src{Proposed implementation of the no-new-participant-data route permitted by the rubric}
+\end{frame}
+
+\section{Answer}
+\begin{frame}{The replay supports a bounded answer}
+\begin{tbox}{Answer to the investigation}
+For this recorded trial and spherical racket proxy, ball offsets of 0 and 8 cm intersect the modeled path. Offsets of 15 and 30 cm do not.
+\end{tbox}
+\par\bigskip
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+\textbf{What the evidence supports}
+\begin{itemize}\small
+\item Reproducible recorded-path geometry.
+\item A controlled condition comparison.
+\item Different optical views of one environment.
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Limits on the conclusion}
+\begin{itemize}\small
+\item Hand-height mismatch reaches 10.9 cm.
+\item Racket pose, ball dynamics and adaptation are absent.
+\item Judgments and haptic pickup remain untested.
+\end{itemize}
+\end{column}
+\end{columns}
+\par\medskip
+{\small A stronger test would add direct racket tracking, matched OpenSim pose captures and preregistered observer judgments.}
+\src{Finite export check at repository revision \texttt{90abbd9}; no claim of maximum reach}
+\end{frame}

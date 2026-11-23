@@ -1,0 +1,311 @@
+{
+  "source_commit": "90abbd9f87f20fb2c8a05ab9879a74202d0eaead",
+  "frame_count": 379,
+  "sampling_hz": 60,
+  "duration_s": 6.3,
+  "reference_frame": 185,
+  "reference_time_s": 3.0833333333333335,
+  "peak_proxy_speed_m_s": 7.836989946112735,
+  "conditions": [
+    {
+      "condition": "C1",
+      "offset_m": 0.0,
+      "min_distance_m": 0.0,
+      "closest_frame": 185,
+      "closest_time_s": 3.0833333333333335,
+      "margin_m": 0.095,
+      "intercept": true
+    },
+    {
+      "condition": "C2",
+      "offset_m": 0.08,
+      "min_distance_m": 0.07999999999999996,
+      "closest_frame": 185,
+      "closest_time_s": 3.0833333333333335,
+      "margin_m": 0.015000000000000041,
+      "intercept": true
+    },
+    {
+      "condition": "C3",
+      "offset_m": 0.15,
+      "min_distance_m": 0.15000000000000002,
+      "closest_frame": 185,
+      "closest_time_s": 3.0833333333333335,
+      "margin_m": -0.05500000000000002,
+      "intercept": false
+    },
+    {
+      "condition": "C4",
+      "offset_m": 0.3,
+      "min_distance_m": 0.2958476062397647,
+      "closest_frame": 101,
+      "closest_time_s": 1.6833333333333333,
+      "margin_m": -0.2008476062397647,
+      "intercept": false
+    }
+  ],
+  "validation": [
+    {
+      "frame": 150,
+      "vizard_time_s": 2.5,
+      "opensim_time_s": 2.499,
+      "opensim_elbow_deg": 68.0313,
+      "vizard_elbow_deg": 71.60431148302553,
+      "delta_elbow_deg": 3.5730114830255246,
+      "opensim_height_m": 1.12415219,
+      "vizard_height_m": 1.080662502,
+      "delta_height_m": -0.04348968799999997
+    },
+    {
+      "frame": 185,
+      "vizard_time_s": 3.0833333333333335,
+      "opensim_time_s": 3.083,
+      "opensim_elbow_deg": 15.482,
+      "vizard_elbow_deg": 20.596292665636156,
+      "delta_elbow_deg": 5.114292665636157,
+      "opensim_height_m": 1.1481363,
+      "vizard_height_m": 1.177461427,
+      "delta_height_m": 0.029325126999999895
+    },
+    {
+      "frame": 216,
+      "vizard_time_s": 3.6,
+      "opensim_time_s": 3.6,
+      "opensim_elbow_deg": 95.0209,
+      "vizard_elbow_deg": 94.63627651118381,
+      "delta_elbow_deg": -0.3846234888161888,
+      "opensim_height_m": 1.22518478,
+      "vizard_height_m": 1.334221171,
+      "delta_height_m": 0.10903639100000007
+    }
+  ],
+  "annex_b": {
+    "peak_frames": [
+      101,
+      185,
+      260
+    ],
+    "peak_times_s": [
+      1.6833333333333333,
+      3.0833333333333335,
+      4.333333333333333
+    ],
+    "peak_speeds_m_s": [
+      7.716825319235866,
+      7.836989946112735,
+      7.2605543235703855
+    ],
+    "rms_peak_position_spread_m": 0.0680240310950874,
+    "speed_bin_counts": [
+      [
+        146,
+        88,
+        53,
+        35,
+        12,
+        12,
+        17,
+        16
+      ],
+      [
+        5,
+        3,
+        3,
+        2,
+        2,
+        4,
+        5,
+        7
+      ],
+      [
+        4,
+        2,
+        4,
+        3,
+        2,
+        3,
+        6,
+        7
+      ],
+      [
+        3,
+        5,
+        4,
+        3,
+        3,
+        5,
+        6,
+        2
+      ]
+    ],
+    "entropy_bits": [
+      2.442637082920296,
+      2.87740468433514,
+      2.8680339083527753,
+      2.9221408762032954
+    ],
+    "entropy_nats": [
+      1.6931070071573724,
+      1.9944649442768816,
+      1.9879696173250467,
+      2.0254737095392823
+    ],
+    "smoothed_kl_bits": [
+      [
+        0.0,
+        0.03184967868161416,
+        0.19619766886348758
+      ],
+      [
+        0.03176485074149101,
+        0.0,
+        0.2051197084945854
+      ],
+      [
+        0.158003980860756,
+        0.18029381649312667,
+        0.0
+      ]
+    ],
+    "condition_by_stroke_min_distance_m": [
+      [
+        0.08267556106576725,
+        0.0,
+        0.0832444462004767
+      ],
+      [
+        0.10369537336002627,
+        0.08000000000000002,
+        0.16022532899929326
+      ],
+      [
+        0.1571003731939205,
+        0.15,
+        0.2292855414192661
+      ],
+      [
+        0.2958476062397646,
+        0.30000000000000004,
+        0.37843636345444914
+      ]
+    ],
+    "intercepts_per_three_windows": [
+      3,
+      1,
+      0,
+      0
+    ],
+    "near_far_counts": [
+      [
+        4,
+        2
+      ],
+      [
+        0,
+        6
+      ]
+    ],
+    "outcome_entropy_bits": 0.9182958340544896,
+    "near_far_mutual_information_bits": 0.4591479170272448,
+    "condition_mutual_information_bits": 0.6887218755408671,
+    "frame_events": [
+      {
+        "counts": [
+          [
+            3,
+            54
+          ],
+          [
+            0,
+            322
+          ]
+        ],
+        "mutual_information_bits": 0.021895162389153497
+      },
+      {
+        "counts": [
+          [
+            1,
+            56
+          ],
+          [
+            0,
+            322
+          ]
+        ],
+        "mutual_information_bits": 0.007240076356500799
+      },
+      {
+        "counts": [
+          [
+            0,
+            57
+          ],
+          [
+            0,
+            322
+          ]
+        ],
+        "mutual_information_bits": 0.0
+      },
+      {
+        "counts": [
+          [
+            0,
+            57
+          ],
+          [
+            0,
+            322
+          ]
+        ],
+        "mutual_information_bits": 0.0
+      }
+    ],
+    "predictive_changes": [
+      {
+        "reference_only": 0.6666666666666666,
+        "three_strokes": 0.8,
+        "kl_bits": 0.06303440583379394
+      },
+      {
+        "reference_only": 0.6666666666666666,
+        "three_strokes": 0.4,
+        "kl_bits": 0.21401190626648742
+      },
+      {
+        "reference_only": 0.3333333333333333,
+        "three_strokes": 0.2,
+        "kl_bits": 0.06303440583379383
+      },
+      {
+        "reference_only": 0.3333333333333333,
+        "three_strokes": 0.2,
+        "kl_bits": 0.06303440583379383
+      }
+    ],
+    "illustrative_observer": {
+      "assumed_prior": 0.5,
+      "assumed_hit_rate": 0.85,
+      "assumed_false_alarm_rate": 0.2,
+      "p_feasible_given_yes": 0.8095238095238094,
+      "p_feasible_given_no": 0.15789473684210525,
+      "mutual_information_bits": 0.33231167924092864
+    },
+    "limits": [
+      "One recorded trial, three dependent selected windows",
+      "Histogram occupancy discards temporal order and depends on bins",
+      "No valid iid entropy-bias correction claimed for autocorrelated frames",
+      "Beta predictions require an illustrative exchangeability assumption",
+      "Observer hit/false-alarm rates are assumed, not observed"
+    ]
+  },
+  "assertion_tested": "Four full-trial discrete proxy distances, three matched-row export comparisons, and Annex B entropy, KL, mutual information and illustrative Bayesian calculations.",
+  "non_claims": [
+    "No Vizard GUI execution",
+    "No OpenSim rerun or synchronized OpenSim pose capture",
+    "No measured racket-ball impact",
+    "No participant judgments",
+    "No maximum actor capability"
+  ]
+}

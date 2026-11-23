@@ -1,0 +1,63 @@
+SPORTS ENGINEERING E2 — PRESENTER NOTES
+English narration. Main presentation: PDF pages 1–13 (cover + 12 numbered slides).
+Target: 4 minutes 55 seconds including 35 seconds of supplied video.
+PDF pages 14–24 are optional evidence and Annex B details for questions.
+Do not narrate all backup slides inside the 3–5 minute submission.
+
+00:00–00:08 — COVER
+We investigate whether this recorded left-handed table-tennis sweep can geometrically intercept a simulated ball at four positions.
+
+00:08–00:26 — SLIDE 1: ACTOR-RELATIVE QUESTION
+The possibility is relative to this player, the recorded path and the racket proxy. We change the ball's outward position. A successful return would also require appropriate timing, blade orientation and ball dynamics. The trial does not measure the player's maximum capability.
+
+00:26–00:46 — SLIDE 2: SOURCE AND CONVERSION
+The source is one Xsens trial with 379 frames at 60 hertz. Vizard reads the segment CSVs from the same trial analyzed in OpenSim. It does not load the OpenSim model. The metric skeleton supplies the measurements; the avatar is qualitative. We preserve timing, metres and floor height while converting the axes.
+
+00:46–01:10 — SLIDE 3: THREE-FRAME VALIDATION
+We compare frames 150, 185 and 216. Raw OpenSim exports and the Vizard calculation differ by minus 4.3, plus 2.9 and plus 10.9 centimetres in hand height. The largest mismatch limits fidelity. These Vizard screenshots accompany exported OpenSim values; matched OpenSim pose screenshots still need to be captured for the strongest validation evidence.
+
+01:10–01:32 — SLIDE 4: INDEPENDENT CRITERION
+There was no racket sensor. We extend a proxy ten centimetres beyond the wrist along the forearm. Geometric overlap requires a centre distance of at most 9.5 centimetres. Only ball offset changes. Frame 185 is the peak proxy-speed reference, not a measured impact. The rule is fixed before the proposed judgment task.
+
+01:32–01:52 — SLIDE 5: FOUR RESULTS
+C1 and C2 intersect under this model. C3 and C4 miss. The tested boundary lies between offsets of 8 and 15 centimetres. C2 passes by only 1.5 centimetres, so reconstruction uncertainty matters. C4's closest approach is earlier because the code searches the full trial, including all three stroke windows.
+
+01:52–02:32 — SLIDE 6: VIDEO / LIVE DEMO
+Play C1VIDEO.mp4 (11.6 seconds), then C2,3,4VIDEO.mp4 (23.6 seconds).
+The PDF links are external local-file links, not embedded videos. If the viewer blocks them, open the files in your media player.
+Say over the footage: “The same movement and speed are retained while the ball position changes across conditions. The numerical criterion can be hidden until judgments are recorded.”
+For a fresh final recording in Vizard, demonstrate SPACE play/pause, R restart, S labeled slow motion, keys 1–4, and G for a validation time. Existing condition clips should be checked for which controls they actually show. This preparation did not execute the Windows Vizard GUI.
+
+02:32–02:52 — SLIDE 7: GIBSON AND VIEWPOINT
+The closing gap, trajectory alignment and scene scale are candidate optical cues. Top-down views show horizontal separation but compress vertical differences. Changing the camera changes available information about the same public environment. It does not change the world-coordinate criterion. We have not measured which cues observers use.
+
+02:52–03:15 — SLIDE 8: POSSIBILITY, JUDGMENT, OUTCOME, HAPTICS
+A modeled possibility, a person's judgment and a successful return are different. In live play, posture changes covary with contact and inertial forces. That is haptic information in its own right. The desktop replay offers visual information only; it does not demonstrate haptic pickup or a closed perception–action loop.
+
+03:15–03:38 — SLIDE 9: PROPOSED JUDGMENT PROTOCOL
+We use the proposed-protocol route allowed by the rubric. Three consenting peers would each view twelve randomized presentations at one fixed camera and speed. Hide numerical labels, criterion and console. Collect possible/not-possible and confidence before feedback. Compare descriptive counts with the independent criterion. No participant responses have been collected.
+
+03:38–03:57 — SLIDE 10: BOUNDED ANSWER
+The replay supports the controlled geometry result and exposes meaningful cross-pipeline discrepancies. It establishes neither successful returns nor maximum capability. Direct racket tracking, synchronized OpenSim pose captures and a calibrated uncertainty analysis would strengthen the conclusions.
+
+03:57–04:25 — SLIDE 11: SHANNON ENTROPY, ANNEX B
+Annex B also quantifies speed variability. We use eight bins one metre per second wide, and thirty-one frames around each of three speed peaks. Shannon entropy is about 2.9 bits in each stroke window, near the three-bit maximum. The whole trial is lower at 2.443 bits because it includes many slow frames. This describes speed occupancy, not skill, temporal predictability or perceived affordance. Multiply bits by the natural logarithm of two to obtain nats.
+
+04:25–04:55 — SLIDE 12: MUTUAL INFORMATION, ANNEX B
+Across three stroke windows and four ball locations, C1 intersects in all three windows, C2 in one, and C3 and C4 in none. Near versus far reduces the empirical outcome uncertainty from 0.918 to 0.459 bits: a gain of 0.459 bits. These are twelve modeled combinations, not twelve independent sporting trials. Shannon quantifies uncertainty in this model; Gibson concerns information available for action. Observer perception remains to be measured.
+
+OPTIONAL ANNEX B DETAILS — PDF pages 21–24
+H: KL uses a 0.5 pseudo-count per speed bin. S1 and S2 have similar occupancy; S3 differs. Histograms discard temporal order.
+I: All three C1 overlap frames are fast, yet only three of fifty-seven fast frames overlap. P(overlap | fast)=0.0526 and I=0.022 bits. Frame frequencies do not estimate successful returns.
+J: With an illustrative uniform Beta prior, the C2 predictive mean changes from 0.667 to 0.4 after including three windows. The 0.214-bit KL is between predictive Bernoulli distributions, not parameter posteriors. Exchangeability and independence are not established here.
+K: The 0.85 hit rate and 0.20 false-alarm rate are assumed. The resulting P(feasible | yes)=0.810 and I=0.332 bits are illustrative. Never present them as participant results.
+
+LIKELY QUESTIONS
+Why does C4 have a different timestamp? The criterion minimizes distance across all 379 frames. Its nearest approach is at f101, still outside the threshold.
+Why not say the actor cannot reach C3? The player might adapt footwork, trunk or arm motion. This test freezes a recorded path.
+Does high Shannon entropy mean better performance? No. It describes occupancy over selected speed bins and ignores temporal ordering.
+Does KL measure different movement trajectories? Not here. It compares speed histograms. Similar histograms can come from different temporal or spatial trajectories.
+Is C2's classification robust? It is deterministic for these data and assumptions, but the small margin requires a calibrated spatial-error analysis. Cross-pipeline hand-height discrepancy is not itself a proxy-error distribution.
+Did we collect judgments? No. The protocol and ideal-observer example are explicitly proposed or illustrative.
+What is still missing for full fidelity evidence? Matching OpenSim pose screenshots and investigation of the hand-height mismatch. Export plots cannot substitute for a claimed live OpenSim pose capture.
+What has been checked? Export arithmetic, independent distance calculations in original Xsens coordinates, Shannon calculations, LaTeX compilation and slide rendering. Windows Vizard playback was not rerun.

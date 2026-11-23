@@ -1,0 +1,126 @@
+\section{Annex B details}
+\begin{frame}{H. KL compares speed distributions}
+\evidence{Recorded speed occupancy; 0.5 pseudo-count per bin before comparison}
+\[
+D_{\rm KL}(P\Vert Q)=\sum_k p_k\log_2\frac{p_k}{q_k}
+\]
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.45\textwidth}
+\centering
+\begin{tabular}{@{}lrrr@{}}\toprule
+$P\backslash Q$ & S1 & S2 & S3\\\midrule
+S1 & 0 & 0.032 & 0.196\\
+S2 & 0.032 & 0 & 0.205\\
+S3 & 0.158 & 0.180 & 0\\\bottomrule
+\end{tabular}\par
+\par\par\smallskip{\small Units: bits. Rows are $P$, columns are $Q$.}
+\end{column}
+\begin{column}{0.51\textwidth}
+\begin{itemize}\small
+\item S1 and S2 have similar speed-bin occupancy.
+\item S3 differs more under this histogram definition.
+\item Direction matters: $D(P\Vert Q)\neq D(Q\Vert P)$ in general.
+\item Occupancy discards temporal order and spatial path.
+\end{itemize}
+\end{column}
+\end{columns}
+\par\bigskip
+\small Autocorrelated frames and only 31 frames per window limit inference. Entropy and KL are not measures of affordance perception or athletic quality.
+\src{Annex B, KL analysis; \texttt{info\_theory.m}; independent Python calculation}
+\end{frame}
+
+\begin{frame}{I. Fast motion is weak evidence of contact}
+\evidence{Annex B, Problem 1. Frequencies over recorded frames, using the simulated C1 ball.}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.46\textwidth}
+\centering\small
+\begin{tabular}{@{}lrr@{}}\toprule
+ & Overlap & No overlap\\\midrule
+Fast ($\geq4$ m/s) & 3 & 54\\
+Slow ($<4$ m/s) & 0 & 322\\\bottomrule
+\end{tabular}\par
+\par\bigskip\raggedright
+$A$: fast frame.\\[4pt]
+$B$: proxy--ball distance $\leq0.095$ m.
+\end{column}
+\begin{column}{0.50\textwidth}
+\[
+P(B)=\frac{3}{379}=0.0079
+\]
+\[
+P(B\mid A)=\frac{3}{57}=0.0526
+\]
+\[
+P(A\mid B)=1,\qquad I(A;B)=0.022\ {\rm bits}
+\]
+\end{column}
+\end{columns}
+\par\bigskip
+\small Every sampled overlap is fast, but most fast frames do not overlap. C1 overlap surprisal is $-\log_2(3/379)=6.98$ bits.
+\src{Frame frequencies are not probabilities of successful returns; Annex B, Problem 1}
+\end{frame}
+
+\begin{frame}{J. Bayes illustrates limited prediction}
+\evidence{Annex B, Problems 3--4. Illustrative Bernoulli model with a uniform Beta(1,1) prior.}
+\[
+p\mid s,n\sim{\rm Beta}(1+s,1+n-s),
+\qquad E[p\mid s,n]=\frac{s+1}{n+2}
+\]
+\centering\small
+\begin{tabular}{@{}lrrrr@{}}\toprule
+ & Intercepts / 3 & Mean after S2 & Mean after 3 & Predictive KL (bits)\\\midrule
+C1 & 3 & 0.667 & 0.800 & 0.063\\
+C2 & 1 & 0.667 & 0.400 & 0.214\\
+C3 & 0 & 0.333 & 0.200 & 0.063\\
+C4 & 0 & 0.333 & 0.200 & 0.063\\\bottomrule
+\end{tabular}\par
+\par\bigskip\raggedright
+\begin{itemize}
+\item C2 changes most when the other two stroke windows enter the calculation.
+\item Predictive KL compares the updated Bernoulli prediction with the earlier prediction. It is not the KL between parameter posteriors.
+\item These selected, dependent strokes do not establish calibrated future-success probabilities.
+\end{itemize}
+\src{Three windows from one trial; ball placement is anchored to S2}
+\end{frame}
+
+\begin{frame}{K. Observer information is illustrative}
+\evidence{Annex B, Problem 5. ASSUMED observer rates, not participant data.}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.46\textwidth}
+\textbf{Assumed inputs}
+\[
+P(F)=0.50
+\]
+\[
+P(J\mid F)=0.85,\quad P(J\mid\neg F)=0.20
+\]
+\small $F$: modeled feasibility.\\
+$J$: observer says possible.
+\par\medskip
+\centering
+\begin{tabular}{@{}lrr@{}}\toprule
+Joint probability & Yes & No\\\midrule
+Feasible & 0.425 & 0.075\\
+Not feasible & 0.100 & 0.400\\\bottomrule
+\end{tabular}\par
+\end{column}
+\begin{column}{0.50\textwidth}
+\textbf{Bayes and mutual information}
+\[
+P(F\mid J)=\frac{0.85(0.50)}{0.525}=0.810
+\]
+\[
+P(F\mid\neg J)=0.158
+\]
+\[
+I(F;J)=0.332\ {\rm bits}
+\]
+\small Actual judgments could replace these assumed rates in a later, controlled comparison of camera views.
+\end{column}
+\end{columns}
+\par\bigskip
+\begin{ibox}
+Shannon quantifies uncertainty. Gibson concerns information for action.
+\end{ibox}
+\src{The assumed channel does not demonstrate optical cue pickup, haptics or real-world success}
+\end{frame}

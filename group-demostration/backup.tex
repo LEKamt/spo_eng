@@ -1,0 +1,135 @@
+\section{Evidence and questions}
+\begin{frame}{A. Numerical validation}
+\evidence{Recomputed exports; differences use unrounded values}
+\centering\footnotesize
+\begin{tabular}{@{}crlrrr@{}}\toprule
+Frame & Time (s) & Quantity & OpenSim & Vizard & Difference\\\midrule
+150 & 2.500 & Elbow (deg) & 68.031 & 71.604 & $+3.573$\\
+ & & Hand height (m) & 1.1242 & 1.0807 & $-0.0435$\\
+185 & 3.083 & Elbow (deg) & 15.482 & 20.596 & $+5.114$\\
+ & & Hand height (m) & 1.1481 & 1.1775 & $+0.0293$\\
+216 & 3.600 & Elbow (deg) & 95.021 & 94.636 & $-0.385$\\
+ & & Hand height (m) & 1.2252 & 1.3342 & $+0.1090$\\\bottomrule
+\end{tabular}\par
+\par\medskip\raggedright\small
+\begin{itemize}
+\item Zero-based indexing. OpenSim times: 2.499, 3.083, 3.600 s. Maximum timestamp difference: 1 ms.
+\item Geometry and model coordinates need not define the same elbow or hand point.
+\item No matched OpenSim pose screenshots are supplied. Export comparisons do not close that visual-validation requirement.
+\end{itemize}
+\src{\texttt{evidence/validation.csv}; original report table retained unchanged}
+\end{frame}
+
+\begin{frame}{B. Hand-height mismatch varies over time}
+\evidence{Replotted exported data, not a new OpenSim execution}
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=13.2cm,height=4.7cm,xlabel={Time from frame index (s)},ylabel={Left hand height (m)},
+xmin=0,xmax=6.3,ymin=0.75,ymax=1.85,tick label style={font=\footnotesize},label style={font=\small},
+grid=major,grid style={black!10},legend style={font=\footnotesize,draw=none,fill=white,at={(0.01,0.98)},anchor=north west},legend cell align=left]
+\addplot[black,thick] table[x=time_s,y=opensim_height_m,col sep=comma]{evidence/kinematics.csv};
+\addlegendentry{OpenSim export}
+\addplot[black,thick,dashed] table[x=time_s,y=vizard_height_m,col sep=comma]{evidence/kinematics.csv};
+\addlegendentry{Vizard skeleton}
+\draw[gray,densely dotted] (axis cs:2.5,0.75)--(axis cs:2.5,1.85);
+\draw[gray,densely dotted] (axis cs:3.083333,0.75)--(axis cs:3.083333,1.85);
+\draw[gray,densely dotted] (axis cs:3.6,0.75)--(axis cs:3.6,1.85);
+\addplot[only marks,mark=*,mark size=2pt] coordinates {(2.5,1.12415219)(3.083333,1.1481363)(3.6,1.22518478)};
+\addplot[only marks,mark=square*,mark size=2pt] coordinates {(2.5,1.080662502)(3.083333,1.177461427)(3.6,1.334221171)};
+\end{axis}
+\end{tikzpicture}
+\par\small Three checks sample a time-varying mismatch. They do not establish a global accuracy bound.
+\src{\texttt{left\_hand\_height.csv}; Xsens positions; \texttt{evidence/kinematics.csv}}
+\end{frame}
+
+\begin{frame}{C. Conditions predicted to intersect}
+\evidence{Existing Vizard screenshots at 3.083 s, frame 185}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{C1: $d=0.00$ m}\par\par\smallskip\shot{C1.png}{2.45cm}\par\shot{hud_C1.png}{1.35cm}
+\par\smallskip
+\small $D=0.000$ m, margin $+0.095$ m.\\Prediction: possible. Result: intercept.
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{C2: $d=0.08$ m}\par\par\smallskip\shot{C2.png}{2.45cm}\par\shot{hud_C2.png}{1.35cm}
+\par\smallskip
+\small $D=0.080$ m, margin $+0.015$ m.\\Prediction: possible. Result: intercept.
+\end{column}
+\end{columns}
+\src{C1/C2 scene captures and HUD crops from the repository}
+\end{frame}
+
+\begin{frame}{D. Conditions predicted to miss}
+\evidence{Scene screenshots at 3.083 s; criterion searches the full trial}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{C3: $d=0.15$ m}\par\par\smallskip\shot{C3.png}{2.45cm}\par\shot{hud_C3.png}{1.35cm}
+\par\smallskip
+\small $D=0.150$ m at 3.083 s.\\Prediction: no. Result: miss.
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{C4: $d=0.30$ m}\par\par\smallskip\shot{C4.png}{2.45cm}\par\shot{hud_C4.png}{1.35cm}
+\par\smallskip
+\small $D=0.296$ m at 1.683 s.\\Prediction: no. Result: miss.
+\end{column}
+\end{columns}
+\src{C4 screenshot time differs from its closest-approach time; no contact occurs}
+\end{frame}
+
+\begin{frame}{E. Reproduction and submission}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+\textbf{Original scene}
+\begin{enumerate}\small
+\item Use Vizard 8.3.1 on Windows.
+\item Keep \texttt{src/script/} and \texttt{src/motion-data/} together.
+\item Open \path{topspin_affordance_scene.py} in Vizard and press F5.
+\item Use the bundled Vizard ground, sky and avatar resources.
+\end{enumerate}
+\par\smallskip\small MATLAB and OpenSim are not required at scene runtime.
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Canvas submissions}
+\begin{itemize}\small
+\item Reproducible group ZIP.
+\item Group report: at most 6 pages, excluding references and individual statements.
+\item Narrated/captioned MP4: 3--5 minutes.
+\item Individual PDF: 300--500 words per student.
+\end{itemize}
+\par\smallskip\small The deck supports the demonstration. It does not replace the four required submissions.
+\end{column}
+\end{columns}
+\src{E2 rubric, p. 2; README and source. Vizard GUI not rerun on this Mac.}
+\end{frame}
+
+\begin{frame}{F. Contributions and AI disclosure}
+\small
+\begin{tabularx}{\textwidth}{@{}p{2cm}Yp{4cm}@{}}\toprule
+Student & Reported role & File or artifact evidence\\\midrule
+J. Chambe & Presentation and demonstration recording & This deck; bundled condition clips\\[5pt]
+S. Gonz\'alez & Vizard scene, controls, geometry and conditions & \path{src/script/topspin_affordance_scene.py}\\[5pt]
+L. Kamt & OpenSim processing and group report & \path{src/required-assets/}; \path{group-report/}\\\bottomrule
+\end{tabularx}\par
+\par\bigskip
+\begin{tbox}{AI assistance in this presentation}
+\small OpenAI Codex assisted with rubric mapping, slide drafting, numerical checks and LaTeX preparation. Export calculations and compilation were checked. No participant judgments were generated.
+\end{tbox}
+\small Each student should verify the final material and provide their own contribution statement.
+\src{Roles reproduced from the group report; authorship was not independently verified}
+\end{frame}
+
+\begin{frame}{G. Sources and evidence trace}
+\footnotesize
+\begin{enumerate}
+\item W. Kim. \emph{ME5314 E2 Examen Final: From OpenSim motion to Vizard affordance investigation}. Course brief and rubric.
+\item J. J. Gibson (1979). \emph{The Ecological Approach to Visual Perception}. Houghton Mifflin. Assigned affordance and self-perception material.
+\item J. J. Gibson (1966). \emph{The Senses Considered as Perceptual Systems}. Houghton Mifflin. Assigned haptic-system material.
+\item C. E. Shannon (1948). \href{https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf}{A Mathematical Theory of Communication}. \emph{Bell System Technical Journal}, 27, 379--423, 623--656.
+\item J. Chambe, S. Gonz\'alez and L. Kamt (2026). \emph{Racket-Ball Affordance for a Recorded Topspin Stroke}, including Annex B. Supplied report, exports and recordings.
+\item \href{https://github.com/LEKamt/spo_eng}{github.com/LEKamt/spo\_eng}, source revision \texttt{90abbd9}. Original terminal Beamer theme retained.
+\end{enumerate}
+\par\medskip
+\begin{tbox}{Reproducible slide numbers}
+\small \path{evidence/verify_results.py} generates the tables and plotted data. \path{evidence/manifest.json} records hashes, conventions and non-claims.
+\end{tbox}
+\end{frame}

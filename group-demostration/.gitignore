@@ -1,0 +1,11 @@
+# Local LaTeX build intermediates. Keep the deliverable main.pdf.
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.xdv
+*.fdb_latexmk
+*.fls
+*.synctex.gz
